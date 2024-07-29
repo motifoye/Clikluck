@@ -2,17 +2,13 @@ using System;
 
 public class Power
 {
-    public int BasePower { get; private set; }
-    public float Coef { get; private set; }
     public int Current { get; private set; }
     public event Action PowerChanged;
 
     private GameManager gm;
-    public Power(GameManager gameManager, int basePower, float coef)
+    public Power()
     {
-        gm = gameManager;
-        BasePower = basePower;
-        Coef = coef;
+        gm = GameManager.Instance;
         SetPower();
         gm.Level.LevelChanged += OnLevelChanged;
     }
@@ -29,7 +25,7 @@ public class Power
 
     private void SetPower()
     {
-        Current = BasePower + (int)Math.Ceiling(Math.Pow(Coef, gm.Level.Current));
+        Current = gm.BasePower + (int)Math.Ceiling(Math.Pow(gm.CoefPower, gm.Level.Current));
         PowerChanged?.Invoke();
     }
 }

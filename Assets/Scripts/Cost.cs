@@ -2,18 +2,14 @@
 
 public class Cost
 {
-    public int BaseCost { get; private set; }
-    public float Coef { get; private set; }
     public int Current { get; private set; }
     public event Action CostChanged;
 
     private GameManager gm;
 
-    public Cost(GameManager gameManager, int baseCost, float coef)
+    public Cost()
     {
-        gm = gameManager;
-        BaseCost = baseCost;
-        Coef = coef;
+        gm = GameManager.Instance;
         SetCost();
         gm.Level.LevelChanged += OnLevelChanged;
     }
@@ -25,7 +21,7 @@ public class Cost
 
     private void SetCost()
     {
-        Current = BaseCost + (int)Math.Round(Math.Pow(Coef, gm.Level.Current));
+        Current = gm.BaseCost + (int)Math.Round(Math.Pow(gm.CoefCost, gm.Level.Current));
         CostChanged?.Invoke();
     }
 

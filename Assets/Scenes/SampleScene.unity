@@ -2247,7 +2247,7 @@ MonoBehaviour:
   baseMoney: 0
   basePower: 1
   baseCost: 10
-  coefPower: 1.5
+  coefPower: 1.7
   coefCost: 3
 --- !u!4 &1330849373
 Transform:

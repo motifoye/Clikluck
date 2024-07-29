@@ -14,9 +14,14 @@ public class GameManager : MonoBehaviour
         baseCost = 10;
 
     [SerializeField]
-    private float
-        coefPower = 1.5f,
-        coefCost = 3f;
+    private float coefPower = 1.5f, coefCost = 3f;
+
+    public int BaseLevel { get => baseLevel; }
+    public int BaseMoney { get => baseMoney; }
+    public int BasePower { get => basePower; }
+    public int BaseCost { get => baseCost; }
+    public float CoefPower { get => coefPower; }
+    public float CoefCost { get => coefCost; }
 
     public Level Level { get; private set; }
     public Money Money { get; private set; }
@@ -31,18 +36,19 @@ public class GameManager : MonoBehaviour
 
         Level = new Level();
         Money = new Money();
-        Power = new Power(this, basePower, coefPower);
-        Cost  = new Cost(this, baseCost, coefCost);
+        Power = new Power();
+        Cost  = new Cost();
 
     }
 
     public void Awake()
     {
-        gameLevel = PlayerPrefs.GetInt(nameof(gameLevel), baseLevel);
-        gameMoney = PlayerPrefs.GetInt(nameof(gameMoney), baseMoney);
+        gameLevel = PlayerPrefs.GetInt(nameof(gameLevel), BaseLevel);
+        gameMoney = PlayerPrefs.GetInt(nameof(gameMoney), BaseMoney);
 
         Level.Set(gameLevel);
         Money.Set(gameMoney);
+
     }
 
     public void OnDestroy()
