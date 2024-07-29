@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(UpgradeComponent))]
 [RequireComponent(typeof(Button))]
 public class UpgradeView : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class UpgradeView : MonoBehaviour
 
     private Button button;
     private GameManager gm;
+    private UpgradeComponent uc;
 
     public void Awake()
     {
         gm = GameManager.Instance;
         button = GetComponent<Button>();
+        uc = GetComponent<UpgradeComponent>();
         SetText();
         SetState();
     }
@@ -23,12 +26,14 @@ public class UpgradeView : MonoBehaviour
     {
         gm.Money.MoneyChanged += SetState;
         gm.Cost.CostChanged += SetText;
+        uc.Clicked += SetState;
     }
 
     public void OnDisable()
     {
         gm.Money.MoneyChanged -= SetState;
         gm.Cost.CostChanged -= SetText;
+        uc.Clicked -= SetState;
     }
 
     private void SetText()

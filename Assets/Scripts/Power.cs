@@ -29,7 +29,7 @@ public class Power
 
     private void SetPower()
     {
-        Current = BasePower + (int)Math.Round(Math.Pow(Coef, gm.Level.Current));
+        Current = BasePower + (int)Math.Ceiling(Math.Pow(Coef, gm.Level.Current));
         PowerChanged?.Invoke();
     }
 }
